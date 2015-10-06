@@ -29,10 +29,15 @@ describe 'integration tests with custom constructors', ->
     expect(@queue.dequeue()).to.equal(3)
 
 describe 'integration tests', ->
-  beforeEach ->
-    @queue = new PriorityQueue()
+  it 'should enqueue options.initialValues', ->
+    @queue = new PriorityQueue(initialValues: [ 3, 1, 2 ])
+    expect(@queue.length).to.equal(3)
+    expect(@queue.dequeue()).to.equal(1)
+    expect(@queue.dequeue()).to.equal(2)
+    expect(@queue.dequeue()).to.equal(3)
 
   it 'should stay sorted', ->
+    @queue = new PriorityQueue()
     @queue.queue(1)
     @queue.queue(3)
     @queue.queue(2)
